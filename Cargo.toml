@@ -1,0 +1,17 @@
+[package]
+name = "hello-wasm"
+version = "0.1.0"
+edition = "2024"
+authors = ["jjw3310 <jjw3310@gmail.com>"]
+description = "rust wasm-pack with blockchain"
+license = "GNU General Public License v3.0"
+repository = "https://github.com/jjw3310/wasm_blockchain"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+# wasm-bindgen acts as a kind of bridge between JavaScript and Rust.
+[dependencies]
+wasm-bindgen = "0.2"
