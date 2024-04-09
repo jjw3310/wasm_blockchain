@@ -109,7 +109,17 @@ npm run serve
 ```bash
 npx create-react-app wasm_blockchain
 cd wasm_blockchain
+```
+
+package.json
+```bash
+"build:wasm": "cd ../hello-wasm && wasm-pack build --target web --out-dir pkg",
+```
+
+```bash
 npm install ../hello-wasm/pkg
+or
+npm run build:wasm
 ```
 
 app.js
