@@ -3,8 +3,10 @@ rustup target add wasm32-unknown-unknown
 cargo init --lib hello-wasm
 or
 cargo new --lib hello-wasm
+```
 ```bash
 cargo install wasm-pack
+```
 
 ```bash
 cargo add wasm-bindgen@0.2.91
@@ -35,6 +37,8 @@ crate-type = ["cdylib"]
 [dependencies]
 wasm-bindgen = "0.2"
 ```
+
+# wasm npm deploy example
 ```bash
 npm adduser
 
@@ -44,7 +48,7 @@ cd pkg
 npm publish --access=public
 ```
 
-mkdir package.json
+touch package.json
 ```json
 {
   "scripts": {
@@ -61,7 +65,7 @@ mkdir package.json
 }
 ```
 
-mkdir webpack.config.js
+touch webpack.config.js
 ```js
 const path = require("path");
 module.exports = {
@@ -74,7 +78,7 @@ module.exports = {
 };
 ```
 
-mkdir index.html
+touch index.html
 ```html
 <!doctype html>
 <html>
@@ -88,7 +92,7 @@ mkdir index.html
 </html>
 ```
 
-mkdir index.js
+touch index.js
 ```js
 const js = import("./node_modules/@yournpmusername/hello-wasm/hello_wasm.js");
 js.then((js) => {
@@ -96,8 +100,58 @@ js.then((js) => {
 });
 ```
 
-
 ```bash
 npm install
 npm run serve
+```
+
+# wasm npm cra example
+```bash
+npx create-react-app wasm_blockchain
+cd wasm_blockchain
+npm install ../hello-wasm/pkg
+```
+
+app.js
+```js
+import logo from './logo.svg';
+import init, {hello} from "hello-wasm";
+import React, {useEffect, useState} from "react";
+import './App.css';
+
+function App() {
+  const [isWasmLoaded, setWasmLoaded] = useState(false);
+  useEffect(() => {
+    // Wasm 모듈 초기화
+    init().then(() => {
+      setWasmLoaded(true);
+      // Rust 함수 호출
+      hello("ssssss");
+    });
+  }, []);
+
+  return (
+    <div className="App">
+      {isWasmLoaded ?
+      <div>hello wasm</div>
+    :
+    <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+        </a>
+      </header> }
+    </div>
+  );
+}
+
+export default App;
+
 ```
